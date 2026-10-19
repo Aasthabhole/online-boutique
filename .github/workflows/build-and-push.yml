@@ -1,0 +1,22 @@
+name: Build and Push Images
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Frontend
+        run: docker build -t frontend ./src/frontend
+
+      - name: Build Product Catalog
+        run: docker build -t productcatalogservice ./src/productcatalogservice
+
+      - name: Build Recommendation
+        run: docker build -t recommendationservice ./src/recommendationservice
